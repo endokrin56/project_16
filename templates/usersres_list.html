@@ -18,21 +18,16 @@
 
    {% if usersres %}
       <table>
-
            <tr>
-
-               <td>      № п/п             </td>
-               <td>                     </td>
                <td>      Автор          </td>
+               <td>                     </td>
                <td>                     </td>
                <td>                     </td>
                <td>      Заголовок      </td>
                <td>                    </td>
-                <td>                    </td>
-               <td>      Дата           </td>
-               <td>                    </td>
-               <td>      Категория      </td>
-               <td>                    </td>
+
+
+
           {# Условие на допуск действий. #}
           {% if perms.apps.change_post or perms.apps.post_product %}
                <td>    Действия         </td>
