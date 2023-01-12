@@ -3,20 +3,20 @@
 {% load static%}
 
 {% block title %}
-    Объявления
+    Отзыв
 {% endblock title %}
 
 {% block content %}
 
-     <h3>Список объявлений</h3>
+     <h3>Список отзывов</h3>
 <hr>
     {# Теперь будем проверять не request.user.is_authenticated, а конкретные права #}
     {% if perms.apps.add_post %}
 <!-- Page content-->
-        <a href="{% url 'apps_create' %}">Добавить объявление</a>
+        <a href="{% url 'apps_create' %}">Добавить отзыв</a>
     {% endif %}
 
-   {% if apps %}
+   {% if usersres %}
       <table>
 
            <tr>
@@ -41,29 +41,24 @@
            </tr>
 
 
-           {% for app in apps %}
+           {% for usersre in usersres %}
            <tr>
-                <td> <a href="{% url 'usersres_list' article=app.id %}">{{ app.id }}</a></td>
-                <td>  </td>
-               <td>{{ app.author.last_name|truncatewords:1 }}</td>
+
+               <td>{{ usersre.author.last_name|truncatewords:1 }}</td>
                <td>  </td>
-               <td>{{ app.author.first_name|truncatewords:1 }}</td>
+               <td>{{ usersre.author.first_name|truncatewords:1 }}</td>
               <td>  </td>
-               <td>{{ app.heading }}</td>
+               <td>{{ usersre.heading|truncatewords:10 }}</td>
                <td>  </td>
-               <td>{{ app.apps_datetime|date:'d-m-Y H:i'}}</td>
-                <td>  </td>
-<!--            <td>{{   new.typePost }}</td>  -->
-               <td>{{  app.get_category_display }} {{  app.category.field.choices }}</td>
-               <td>  </td>
+
                <td>
 
                     {# А здесь доступ для каждой ссылки теперь будем проверять отдельно #}
-                    {% if perms.apps.change_post %}
+                    {% if perms.usersre.change_post %}
                     <!--'post_update' pk=new.id -->
                         <a href="{% url 'apps_create'  %}">Изменить</a>
                     {% endif %}
-                    {% if perms.apps.delete_post %}
+                    {% if perms.usersre.delete_post %}
                         <!-- 'post_delete' pk=new.id  -->
                         <a href="{% url 'apps_create'  %}">Удалить</a>
                     {% endif %}

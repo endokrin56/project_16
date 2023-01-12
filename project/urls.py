@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.template.defaulttags import url
 from django.urls import path, include
 
+from app.views import UsersresList
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('pages/', include('django.contrib.flatpages.urls')),
@@ -26,6 +28,8 @@ urlpatterns = [
     path('apps/', include('app.urls')),
     path('', include('app.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('usersresponse/<int:article>', UsersresList.as_view(), name='usersres_list'),
+    path('usersresponse/',  include('app.urls')),
     #url(r'^accounts/', include('registration.backends.simple.urls')),
 ]
 

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView
-from .models import Advertisements
+from .models import Advertisements, Usersresponse
 from .tasks import text, printer, hello
 #
 # # Create your views here.
@@ -92,3 +92,33 @@ class AppsCreate(PermissionRequiredMixin, CreateView):
 
             # def get_absolute_url(self):
             #  self   return f'/news/{self.name}/'
+
+class UsersresList(PermissionRequiredMixin, ListView):
+    permission_required = ('Usersresponse.add_post')
+    raise_exception = True
+    model = Usersresponse
+    fields = '__all__'
+    template_name = 'usersres_list.html'
+    context_object_name = 'usersres'
+    success_url = reverse_lazy('apps_list')
+    queryset = Usersresponse.objects.all()
+        #filter(article=3)
+
+    def form_valid(self, form):
+        apps = form.save(commit=False)
+        # apps.author = 1
+        # hello.delay()
+        # send_mail_c.delay()
+        return super().form_valid(form)
+
+    #def get_queryset(self):
+        # Получаем обычный запрос
+        #queryset = super().get_queryset()
+        # Используем наш класс фильтрации.
+        # self.request.GET содержит объект QueryDict, который мы рассматривали
+        # в этом юните ранее.
+        # Сохраняем нашу фильтрацию в объекте класса,
+        # чтобы потом добавить в контекст и использовать в шаблоне.
+        #self.filterset = PostFilter(self.request.GET, queryset)
+        # Возвращаем из функции отфильтрованный список новостей
+        #return self.filterset.qs

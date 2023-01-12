@@ -213,12 +213,4 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Basic',
         },
-    'awesome_ckeditor':{
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            [ 'Bold','Italic','Underline','Strike',
-              '-','Link','Unlink','Anchor','-', 'Styles','Format','Font','FontSize','-',
-            'Image' ]
-        ]
-    },
 }
